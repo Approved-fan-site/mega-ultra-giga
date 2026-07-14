@@ -83,7 +83,7 @@ header {
     box-shadow: 0 4px 12px rgba(109, 94, 125, 0.02);
 }
 
-/* 新設：ニュース枠（2カラム・レスポンシブ） */
+/* ニュース枠（2カラム・レスポンシブ） */
 .news-box {
     display: flex;
     gap: 1.5rem;
@@ -169,19 +169,38 @@ header {
     margin-bottom: 2rem;
 }
 
+/* 手工芸的な味わいを出すための傾斜写真スタイル */
 .image-box {
     text-align: center;
-    margin: 2rem 0;
+    margin: 2.5rem 0;
+    perspective: 1000px; /* 3D的な奥行き感をわずかに出す */
 }
 .image-box img {
     width: 100%;
     max-width: 280px;
     height: auto;
     border: 1px solid var(--border);
-    padding: 8px;
+    padding: 8px 8px 18px 8px; /* 下部に少し余白を設けてポラロイド風に */
     background: #fff;
     border-radius: 2px;
     box-sizing: border-box;
+    /* ぺたっと感を消す、アナログ写真特有のぼんやりと柔らかな影 */
+    box-shadow: 0 6px 16px rgba(109, 94, 125, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 写真ごとにわずかに異なる角度をつけてリアルさを再現 */
+.rotate-left img {
+    transform: rotate(-2.5deg) translateY(-2px);
+}
+.rotate-right img {
+    transform: rotate(2deg) translateY(-2px);
+}
+
+.image-box img:hover {
+    /* ホバーした時に少しだけ持ち上がる遊び心 */
+    transform: scale(1.02) rotate(0deg);
+    box-shadow: 0 12px 24px rgba(109, 94, 125, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 h2 {
@@ -301,12 +320,20 @@ h2 i {
 
 .bottom-image-box {
     text-align: center;
-    margin: 4rem 0 1rem;
+    margin: 4.5rem 0 1rem;
 }
 .bottom-image-box img {
-    width: 160px;
+    width: 170px;
     height: auto;
-    opacity: 0.85;
+    border: 1px solid var(--border);
+    padding: 8px 8px 20px 8px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 8px 20px rgba(109, 94, 125, 0.08);
+    transition: transform 0.3s ease;
+}
+.bottom-image-box:hover img {
+    transform: scale(1.03) rotate(-1deg);
 }
 
 footer {
@@ -355,7 +382,7 @@ footer {
             得意技はうるとらねこぱんち。（自称）
         </div>
         
-        <div class="image-box">
+        <div class="image-box rotate-left">
             <img src="img0.png" alt="Mega urtr giga 0">
         </div>
         
@@ -369,7 +396,7 @@ footer {
     </div>
 
     <div class="section-block">
-        <div class="image-box">
+        <div class="image-box rotate-right">
             <img src="img1.png" alt="Mega urtr giga 1">
         </div>
         
@@ -402,7 +429,7 @@ footer {
 </div>
 
 <div class="bottom-image-box">
-    <img src="img2.png" alt="Mega urtr giga 2">
+    <img src="img2.png" alt="Mega urtr giga 2" style="transform: rotate(-3deg);">
 </div>
 
 <footer>
