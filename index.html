@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    
+
 <link rel="icon" href="apple-touch-icon.png?v=1">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1">
 
@@ -11,9 +11,35 @@
 <title>メガ・ウルトラギガ 非公式ファンサイト | Mega urtr giga Fan-made Hub 🐾</title>
 <meta name="description" content="321.inc所属の配信者「メガ・ウルトラギガ（Mega urtr giga）」ちゃんの非公式ファンサイトです！最新YouTube動画、X（旧Twitter）、IRIAM、なろう小説などのリンクや最新ニュースをまとめて紹介しています。👊💜">
 <meta name="keywords" content="メガ・ウルトラギガ,メガちゃん,321.inc,IRIAM,イリアム,配信者,ストリーマー,科学者だって魔法を使いたい,ファンサイト">
+
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="googlebot" content="index, follow">
+
+<link rel="canonical" href="https://approved-fan-site.github.io/Mega-Ultr-Giga/">
+
 <meta property="og:title" content="メガ・ウルトラギガ 非公式ファンサイト | Mega urtr giga Fan-made Hub">
 <meta property="og:description" content="321.inc所属「メガ・ウルトラギガ」ちゃんの活動リンクや最新情報をまとめたファン運営サイト。👊💜">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://approved-fan-site.github.io/Mega-Ultr-Giga/">
+<meta property="og:site_name" content="メガ・ウルトラギガ 非公式ファンサイト">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "メガ・ウルトラギガ 非公式ファンサイト",
+  "description": "321.inc所属の配信者メガ・ウルトラギガの活動まとめファンサイト",
+  "url": "https://approved-fan-site.github.io/Mega-Ultr-Giga/",
+  "about": {
+    "@type": "Person",
+    "name": "メガ・ウルトラギガ",
+    "alternateName": ["Mega urtr giga", "メガちゃん"],
+    "jobTitle": "ストリーマー / 配信者",
+    "subOrganization": "321.inc"
+  }
+}
+</script>
 
 <link rel="stylesheet" href="https://maxst.icons8.com/unicode-html-image-resources/lazy-load/assets/styles/letter-icons.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
@@ -22,10 +48,10 @@
 :root {
     --primary: #A799B7;
     --dark: #5A4E69;
-    --light: #FBF9FC; /* より優しく洗練された背景色 */
+    --light: #FBF9FC;
     --accent: #E8E2EE;
     --border: rgba(167, 153, 183, 0.25);
-    --text: #4A444D; /* 視認性を上げつつきつすぎないダークグレー */
+    --text: #4A444D;
     --card-bg: #FFFFFF;
 }
 
@@ -40,7 +66,7 @@ body {
 
 header {
     text-align: center;
-    padding: 6rem 1.5rem 2.5rem; /* ニュースエリアとのバランスを取るため下部余白を微調整 */
+    padding: 6rem 1.5rem 2.5rem;
     background: var(--light);
 }
 
@@ -74,22 +100,20 @@ header {
 }
 
 .container {
-    max-width: 520px; /* 1カラムの美しさを引き立てるタイトな幅 */
+    max-width: 520px;
     margin: 0 auto;
     padding: 0 1.5rem 4rem;
 }
 
-/* セクション共通 */
 .section-block {
     background: var(--card-bg);
     padding: 2.5rem 2rem;
     margin-bottom: 3rem;
-    border-radius: 4px; /* 角丸は最小限の4px */
+    border-radius: 4px;
     border: 1px solid var(--border);
     box-shadow: 0 4px 12px rgba(109, 94, 125, 0.02);
 }
 
-/* ニュース枠（2カラム・レスポンシブ） */
 .news-box {
     display: flex;
     gap: 1.5rem;
@@ -107,7 +131,7 @@ header {
 .news-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 画像比率を保ったまま枠に収める */
+    object-fit: cover;
     display: block;
 }
 .news-content {
@@ -136,7 +160,6 @@ header {
     opacity: 0.9;
 }
 
-/* スマホ表示時（480px以下）にニュースを縦並びにする設定 */
 @media (max-width: 480px) {
     .news-box {
         flex-direction: column;
@@ -175,27 +198,24 @@ header {
     margin-bottom: 2rem;
 }
 
-/* 手工芸的な味わいを出すための傾斜写真スタイル */
 .image-box {
     text-align: center;
     margin: 2.5rem 0;
-    perspective: 1000px; /* 3D的な奥行き感をわずかに出す */
+    perspective: 1000px;
 }
 .image-box img {
     width: 100%;
     max-width: 280px;
     height: auto;
     border: 1px solid var(--border);
-    padding: 8px 8px 18px 8px; /* 下部に少し余白を設けてポラロイド風に */
+    padding: 8px 8px 18px 8px;
     background: #fff;
     border-radius: 2px;
     box-sizing: border-box;
-    /* アナログ写真特有のぼんやりと柔らかな影 */
     box-shadow: 0 6px 16px rgba(109, 94, 125, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 写真ごとにわずかに異なる角度をつけてリアルさを再現 */
 .rotate-left img {
     transform: rotate(-2.5deg) translateY(-2px);
 }
@@ -204,7 +224,6 @@ header {
 }
 
 .image-box img:hover {
-    /* ホバーした時に少しだけ持ち上がる遊び心 */
     transform: scale(1.02) rotate(0deg);
     box-shadow: 0 12px 24px rgba(109, 94, 125, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
@@ -234,7 +253,6 @@ h2 i {
     list-style: none;
 }
 
-/* YouTubeレスポンシブ設定 */
 .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
@@ -251,7 +269,6 @@ h2 i {
     border: none;
 }
 
-/* リンクボタン */
 .btn-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -372,7 +389,7 @@ footer {
             </div>
             <div class="news-content">
                 <span class="news-date">2026.07.14</span>
-                <h3 class="news-title">ファンサイトをリニューアルしました！</h3>
+                <h3 class="news-title">ファンサイトを開設しました！</h3>
                 <p class="news-text">メガ・ウルトラギガちゃんの非公式ファンサイトです。最新情報やリンク一覧をまとめています！🐾</p>
             </div>
         </div>
@@ -382,10 +399,10 @@ footer {
         <div class="mcd-badge"><i class="la la-cat"></i> 週5マック通いの猫</div>
         
         <div class="profile-box">
-            💜イラストレーター🖼️<br>
-            🤍アニメ、カード、ゲームオタク🎮<br>
-            💜やさしい<br>
-            🤍美少女
+            語尾が「ニャン」の猫系ストリーマー。<br>
+            一人称はメガちゃん。<br>
+            とにかく元気いっぱいだニャン！<br>
+            得意技はうるとらねこぱんち。（自称）
         </div>
         
         <div class="image-box rotate-left">
@@ -435,7 +452,7 @@ footer {
 </div>
 
 <div class="bottom-image-box">
-    <img src="img2.png" alt="メガ・ウルトラギガ イラスト03" style="transform: rotate(-3deg);">
+    <img src="img2.png" alt="メガ・ウルトラギガ ファンタジー風イラスト03" style="transform: rotate(-3deg);">
 </div>
 
 <footer>
