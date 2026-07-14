@@ -1,1 +1,1 @@
-# MUG-fan-site
+# mug-fan-site
