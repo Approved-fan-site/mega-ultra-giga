@@ -55,7 +55,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
 
-<!-- GSAP (GreenSock Animation Platform) & ScrollTrigger CDN (ホロライブ等の一流Webサイト標準装備) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
@@ -77,19 +76,18 @@ body {
     margin: 0; padding: 0;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    /* パララックス3Dレンダリング用視点設定 */
     perspective: 1000px;
 }
 
 /* ==========================================
-   企業レベル：ハイブリッド・バックドロップ・システム
+   ハイブリッド・バックドロップ・システム
    ========================================== */
 .space-backdrop {
     position: fixed;
     top: -10%;
     left: 0;
     width: 100%;
-    height: 120%; /* スクロールのゆとり分 */
+    height: 120%;
     background-image: radial-gradient(rgba(167, 153, 183, 0.15) 1.2px, transparent 1.2px);
     background-size: 32px 32px;
     z-index: -2;
@@ -98,11 +96,9 @@ body {
     backface-visibility: hidden;
 }
 
-/* ==========================================
-   GPUアクセラレーションを明示するモーション最適化クラス
-   ========================================== */
+/* スクロールフェードイン（万が一JSが動かなくても表示される安心設計） */
 .gsap-reveal {
-    opacity: 0;
+    opacity: 1; /* 初期値を1にして壊れを徹底防止 */
     will-change: transform, opacity;
     backface-visibility: hidden;
 }
@@ -110,7 +106,7 @@ body {
 header {
     text-align: center;
     padding: 6rem 1.5rem 2.5rem;
-    background: transparent; /* 背景ドットをヘッダー背後にも透過 */
+    background: transparent;
 }
 
 .site-badge {
@@ -256,12 +252,14 @@ header {
 }
 
 /* ==========================================
-   企業レベル：イラスト追従3Dコンテナ
+   浮遊イラストコンテナの調整（重なり防止用余白を追加）
    ========================================== */
 .image-box {
     text-align: center;
-    margin: 2.5rem 0;
+    margin: 1.5rem 0 3.5rem; /* 下側に大きなマージンを確保して、スクロール時に下の文章と被るのを徹底防止 */
     perspective: 1000px;
+    position: relative;
+    z-index: 2;
     will-change: transform;
 }
 .image-box img {
@@ -286,7 +284,7 @@ header {
 }
 
 .image-box img:hover {
-    transform: scale(1.04) rotate(0deg) translateY(-5px) !important; /* JSのアニメーションに干渉させずホバー可能に */
+    transform: scale(1.04) rotate(0deg) translateY(-5px) !important;
     box-shadow: 0 20px 38px rgba(109, 94, 125, 0.16), 0 4px 10px rgba(0, 0, 0, 0.03);
 }
 
@@ -404,11 +402,11 @@ h2 i {
 }
 
 /* ==========================================
-   下部イラストパララックス制御
+   下部イラスト位置の微調整
    ========================================== */
 .bottom-image-box {
     text-align: center;
-    margin: 4.5rem 0 1rem;
+    margin: 3.5rem 0 2rem;
     perspective: 1000px;
     will-change: transform;
 }
@@ -441,10 +439,8 @@ footer {
 
 <body>
 
-<!-- 立体奥行き空間をつくりだす背景レイヤー（企業標準のデプス・イリュージョン） -->
 <div class="space-backdrop" id="js-space-backdrop"></div>
 
-<!-- ヘッダー (クラス指定のみGSAP制御へ切り替え) -->
 <header class="gsap-reveal" id="js-header">
     <span class="site-badge">Unofficial Fan-made Site</span>
     <h1 class="main-visual">
@@ -455,7 +451,6 @@ footer {
 
 <div class="container">
     
-    <!-- NEWS (GSAP制御) -->
     <div class="section-block gsap-reveal" id="js-news-block">
         <h2><i class="la la-bullhorn"></i> NEWS</h2>
         <div class="news-box">
@@ -475,7 +470,6 @@ footer {
         </div>
     </div>
     
-    <!-- PROFILE (GSAP制御) -->
     <div class="section-block gsap-reveal">
         <div class="mcd-badge"><i class="la la-cat"></i> 週5マック通いの猫</div>
         
@@ -486,8 +480,7 @@ footer {
             得意技はうるとらねこぱんち。（自称）
         </div>
         
-        <!-- 立ち絵：スクロールと連動して時間差で上昇・沈降するアニメーションターゲット -->
-        <div class="image-box rotate-left js-parallax-element" data-depth="0.12">
+        <div class="image-box rotate-left js-parallax-element" data-depth="0.05">
             <img src="img0.png" alt="321.inc所属ライバー メガ・ウルトラギガ立ち絵紹介写真">
         </div>
         
@@ -501,10 +494,8 @@ footer {
         </ul>
     </div>
 
-    <!-- VIDEO & LINKS (GSAP制御) -->
     <div class="section-block gsap-reveal">
-        <!-- ファンアート画像：立ち絵と逆方向のデプス追従をさせて空間を広げる -->
-        <div class="image-box rotate-right js-parallax-element" data-depth="-0.08">
+        <div class="image-box rotate-right js-parallax-element" data-depth="-0.03">
             <img src="img1.png" alt="メガ・ウルトラギガ活動イメージファンアート画像">
         </div>
         
@@ -536,9 +527,8 @@ footer {
     </div>
 </div>
 
-<!-- 下部イラストとフッター（GSAP制御） -->
 <div class="gsap-reveal">
-    <div class="bottom-image-box js-parallax-element" data-depth="0.1" style="margin-top: 1.5rem;">
+    <div class="bottom-image-box js-parallax-element" data-depth="0.04" style="margin-top: 1.5rem;">
         <img src="img2.png" alt="メガ・ウルトラギガ ファンタジー風イラストファンアート" style="transform: rotate(-3deg);">
     </div>
 
@@ -554,90 +544,83 @@ footer {
     </footer>
 </div>
 
-<!-- ==========================================
-     GSAP / ScrollTrigger 企業品質・モーションスクリプト
-     ========================================== -->
 <script>
-    // ScrollTriggerを登録
     gsap.registerPlugin(ScrollTrigger);
 
-    // ユーザーにストレスを与えない高級感あふれるイージング関数を定数化
-    const VELOCITY_EASE = "expo.out";
+    // ロード時にヘッダーロゴが一瞬消えるのを防ぐための極上イージング
+    const VELOCITY_EASE = "power3.out";
 
-    // 1. 初期ロード時：ヘッダー＆NEWSの極上の時間差立ち上げ (Stagger Entrance)
     window.addEventListener("DOMContentLoaded", () => {
-        // ロード時にヘッダーとNEWSが順にフワッと立ち上がる（シネマティックエントランス）
+        // ヘッダーは透明度0からではなく、最初から表示した状態でわずかに滑らかに位置を調整
         gsap.fromTo("#js-header", 
-            { opacity: 0, y: 35 },
-            { opacity: 1, y: 0, duration: 1.6, ease: VELOCITY_EASE }
+            { y: 15 },
+            { y: 0, duration: 1.2, ease: VELOCITY_EASE }
         );
         
+        // NEWSブロックも自然にフェードイン
         gsap.fromTo("#js-news-block", 
-            { opacity: 0, y: 40 },
-            { opacity: 1, y: 0, duration: 1.8, ease: VELOCITY_EASE, delay: 0.25 }
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 1.4, ease: VELOCITY_EASE, delay: 0.1 }
         );
     });
 
-    // 2. 背景ドットパターンのスクロール追従（空間の奥行きを騙し絵のように表現）
+    // 背景ドットパターンの上品なスクロール追従
     gsap.to("#js-space-backdrop", {
-        yPercent: 8, // スクロールに対してわずかに遅れて移動させる
+        yPercent: 6,
         ease: "none",
         scrollTrigger: {
             trigger: "body",
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.8 // 追従遅延（0.8秒かけてニュルッと動く）
+            scrub: 0.6
         }
     });
 
-    // 3. 各コンテンツカード：スクロール連動・フェードアップ
-    // ヘッダーとNEWS以外（残りのカードとフッター）に適用
+    // 各コンテンツカード：重なりが起きないよう滑らかにフェードイン
     const revealTargets = gsap.utils.toArray(".gsap-reveal");
     revealTargets.forEach((block) => {
-        // 初期ロードで即座に表示された部分は除外して、スクロール連動を設定
         if (block.id === "js-header" || block.id === "js-news-block") return;
 
         gsap.fromTo(block, 
-            { opacity: 0, y: 60, scale: 0.98 },
+            { opacity: 0, y: 40 },
             { 
                 opacity: 1, 
                 y: 0, 
-                scale: 1,
-                duration: 1.4,
-                ease: "power3.out",
+                duration: 1.2,
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: block,
-                    start: "top 85%", // 画面下部から15%の位置に到達したら始動
-                    end: "top 25%",
-                    toggleActions: "play none none reverse" // スクロールを戻したら逆再生して消える、洗練された制御
+                    start: "top 88%", 
+                    end: "top 30%",
+                    toggleActions: "play none none reverse"
                 }
             }
         );
     });
 
-    // 4. イラスト素材：スクロール物理パララックス効果（奥行きデプス制御）
+    // イラスト素材：絶対にかぶさらないようにパララックスの移動幅（data-depth）を安全な値に抑制
     const parallaxElements = gsap.utils.toArray(".js-parallax-element");
     parallaxElements.forEach((el) => {
-        const depth = parseFloat(el.getAttribute("data-depth")) || 0.1;
+        const depth = parseFloat(el.getAttribute("data-depth")) || 0.05;
         gsap.to(el, {
-            y: () => -window.innerHeight * depth, // 各要素に設定した深度（data-depth）に応じて別々の速度で動く
+            y: () => -window.innerHeight * depth,
             ease: "none",
             scrollTrigger: {
                 trigger: el,
                 start: "top bottom",
                 end: "bottom top",
-                scrub: 1 // 1秒間の超滑らかなタイムラグ慣性
+                scrub: 1.2 // より滑らかにして境界をなめらかに
             }
         });
     });
 
-    // 5. イラスト素材：生きた呼吸を再現する「常時浮遊揺らぎ」アニメーション
+    // イラスト素材：生きた呼吸を再現する「常時浮遊揺らぎ」アニメーション
     const floatingImages = gsap.utils.toArray(".js-parallax-element img, .bottom-image-box img");
     floatingImages.forEach((img, index) => {
         gsap.to(img, {
-            y: 8, // 上下方向の揺らぎ
-            rotation: index % 2 === 0 ? 1.5 : -1.5, // 左右へのごくわずかな首振り
-            duration: 3.5 + (index * 0.5), // 各イラストで周期をズラして不自然さをなくす
+            y: 6, // 浮遊幅を少し小さく上品に
+            rotation: index % 2 === 0 ? 1 : -1, // 首振りもさらに控えめに
+            duration: 4 + (index * 0.5),
             ease: "sine.inOut",
             repeat: -1,
             yoyo: true
