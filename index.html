@@ -75,6 +75,43 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* ==========================================
+   ふわっと出てくるフェードイン・アニメーションの設定
+   ========================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px); /* 最初は少し下に配置して上品に */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* 元の位置に戻る */
+    }
+}
+
+/* アニメーション用クラス */
+.fade-in-element {
+    opacity: 0; /* 最初は非表示にしてガタつき防止 */
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 1.2秒で滑らかに動く */
+}
+
+/* ほんの少し遅らせる（ディレイ）設定 */
+.delay-1 {
+    animation-delay: 0.15s; /* ヘッダー */
+}
+.delay-2 {
+    animation-delay: 0.4s;  /* NEWSブロック */
+}
+.delay-3 {
+    animation-delay: 0.65s; /* PROFILEブロック */
+}
+.delay-4 {
+    animation-delay: 0.9s;  /* LINK & VIDEOブロック */
+}
+.delay-5 {
+    animation-delay: 1.15s; /* 下部イラストとフッター */
+}
+
 header {
     text-align: center;
     padding: 6rem 1.5rem 2.5rem;
@@ -94,8 +131,8 @@ header {
 /* 名前の透過イラスト画像（img4.png）のスタイル設定 */
 .header-logo {
     width: 100%;           /* 横幅いっぱいに広げる */
-    max-width: 480px;      /* パソコン表示時の最大の横幅（1530pxだと大きすぎるため適度に制限） */
-    height: auto;          /* 比率（1530:547）を維持して自動で高さを決定 */
+    max-width: 480px;      /* パソコン表示時の最大の横幅 */
+    height: auto;          /* 比率を維持して自動で高さを決定 */
     aspect-ratio: 1530 / 547; /* 画像のアスペクト比を固定してガタつきを防止 */
     margin: 0 auto;        /* 中央寄せ */
     display: block;        /* 中央寄せに必須 */
@@ -104,7 +141,7 @@ header {
 /* スマホ表示時の画像幅の調整 */
 @media (max-width: 480px) {
     .header-logo {
-        max-width: 300px;  /* スマホの画面幅に合わせて、少し小ぶりに綺麗に収めます */
+        max-width: 300px;  /* スマホの画面幅に合わせて綺麗に収める */
     }
 }
 
@@ -398,7 +435,8 @@ footer {
 
 <body>
 
-<header>
+<!-- ヘッダー -->
+<header class="fade-in-element delay-1">
     <span class="site-badge">Unofficial Fan-made Site</span>
     <h1 class="main-visual">
         <img src="img4.png" alt="メガ・ウルトラギガ" class="header-logo">
@@ -408,7 +446,8 @@ footer {
 
 <div class="container">
     
-    <div class="section-block">
+    <!-- NEWS -->
+    <div class="section-block fade-in-element delay-2">
         <h2><i class="la la-bullhorn"></i> NEWS</h2>
         <div class="news-box">
             <div class="news-image">
@@ -427,7 +466,8 @@ footer {
         </div>
     </div>
     
-    <div class="section-block">
+    <!-- PROFILE -->
+    <div class="section-block fade-in-element delay-3">
         <div class="mcd-badge"><i class="la la-cat"></i> 週5マック通いの猫</div>
         
         <div class="profile-box">
@@ -451,7 +491,8 @@ footer {
         </ul>
     </div>
 
-    <div class="section-block">
+    <!-- VIDEO & LINKS -->
+    <div class="section-block fade-in-element delay-4">
         <div class="image-box rotate-right">
             <img src="img1.png" alt="メガ・ウルトラギガ活動イメージファンアート画像">
         </div>
@@ -484,14 +525,17 @@ footer {
     </div>
 </div>
 
-<div class="bottom-image-box">
-    <img src="img2.png" alt="メガ・ウルトラギガ ファンタジー風イラストファンアート" style="transform: rotate(-3deg);">
-</div>
+<!-- 下部イラストとフッター（container の外側に正しく配置されている元コードの構造を維持） -->
+<div class="fade-in-element delay-5">
+    <div class="bottom-image-box">
+        <img src="img2.png" alt="メガ・ウルトラギガ ファンタジー風イラストファンアート" style="transform: rotate(-3deg);">
+    </div>
 
-<footer>
-    © Mega urtr giga Fan-made Portfolio<br>
-    当サイトの運営および掲載している内容、画像については、マネージャーを通じて許諾を得ております。
-</footer>
+    <footer>
+        © Mega urtr giga Fan-made Portfolio<br>
+        当サイトの運営および掲載している内容、画像については、マネージャーを通じて許諾を得ております。
+    </footer>
+</div>
 
 </body>
 </html>
