@@ -112,7 +112,6 @@ body {
 header {
     text-align: center;
     padding: 6rem 1.5rem 5rem;
-    /* 背景を透明にしてグラデーションを活かす */
     background-color: transparent;
 }
 
@@ -167,7 +166,6 @@ header {
     .container { padding: 1rem 1.2rem 2rem; }
 }
 
-/* すりガラス風のセクション */
 .section-block {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
@@ -207,7 +205,6 @@ header {
     width: 140px;
     height: 140px;
     flex-shrink: 0;
-    /* すりガラス枠 */
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -280,13 +277,12 @@ header {
 
 .image-box img {
     width: 100%;
-    max-width: 480px; /* 16:9に合わせて少し横幅を広げました */
+    max-width: 480px;
     height: auto;
-    aspect-ratio: 16 / 9; /* 4/5の縦長から、16:9の横長へ変更 */
-    object-fit: cover;
+    aspect-ratio: 16 / 9; /* 比率を16:9に固定 */
+    object-fit: cover; /* 画像をはみ出さず、歪ませずに切り抜く */
     border: 1px solid var(--glass-border);
-    padding: 10px 10px 24px 10px;
-    /* 写真のフチも少し透けさせる */
+    padding: 12px; /* 縦長ポラロイド風の下余白を廃止し、均等な12pxに変更 */
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -367,8 +363,6 @@ h2 {
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--dark);
-    
-    /* ボタンもほんのり透ける */
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -422,18 +416,19 @@ h2 {
     color: #FFFFFF;
 }
 
+/* 下部のアート用画像ボックス */
 .bottom-image-box {
     text-align: center;
     margin: 4rem 0 3rem;
 }
 .bottom-image-box img {
     width: 100%;
-    max-width: 320px; /* 16:9に合わせて少し横幅を広げました */
+    max-width: 320px;
     height: auto;
-    aspect-ratio: 16 / 9; /* 4/5の縦長から、16:9の横長へ変更 */
-    object-fit: cover;
+    aspect-ratio: 16 / 9; /* 比率を16:9に固定 */
+    object-fit: cover; /* 画像をはみ出さず、歪ませずに切り抜く */
     border: 1px solid var(--glass-border);
-    padding: 10px 10px 24px 10px;
+    padding: 12px; /* 縦長ポラロイド風の下余白を廃止し、均等な12pxに変更 */
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -462,8 +457,6 @@ h2 {
     max-width: 680px;
     margin: 0 auto 2.5rem;
     text-align: left;
-    
-    /* フッター内のカードもすりガラス仕様に */
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
