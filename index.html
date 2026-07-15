@@ -55,9 +55,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
 <style>
 :root {
     --primary: #A799B7;
@@ -76,37 +73,49 @@ body {
     margin: 0; padding: 0;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    perspective: 1000px;
 }
 
 /* ==========================================
-   ハイブリッド・バックドロップ・システム
+   ふわっと出てくるフェードイン・アニメーションの設定
    ========================================== */
-.space-backdrop {
-    position: fixed;
-    top: -10%;
-    left: 0;
-    width: 100%;
-    height: 120%;
-    background-image: radial-gradient(rgba(167, 153, 183, 0.15) 1.2px, transparent 1.2px);
-    background-size: 32px 32px;
-    z-index: -2;
-    pointer-events: none;
-    will-change: transform;
-    backface-visibility: hidden;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px); /* 最初は少し下に配置して上品に */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* 元の位置に戻る */
+    }
 }
 
-/* スクロールフェードイン（万が一JSが動かなくても表示される安心設計） */
-.gsap-reveal {
-    opacity: 1; /* 初期値を1にして壊れを徹底防止 */
-    will-change: transform, opacity;
-    backface-visibility: hidden;
+/* アニメーション用クラス */
+.fade-in-element {
+    opacity: 0; /* 最初は非表示にしてガタつき防止 */
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 1.2秒で滑らかに動く */
+}
+
+/* ほんの少し遅らせる（ディレイ）設定 */
+.delay-1 {
+    animation-delay: 0.15s; /* ヘッダー */
+}
+.delay-2 {
+    animation-delay: 0.4s;  /* NEWSブロック */
+}
+.delay-3 {
+    animation-delay: 0.65s; /* PROFILEブロック */
+}
+.delay-4 {
+    animation-delay: 0.9s;  /* LINK & VIDEOブロック */
+}
+.delay-5 {
+    animation-delay: 1.15s; /* 下部イラストとフッター */
 }
 
 header {
     text-align: center;
     padding: 6rem 1.5rem 2.5rem;
-    background: transparent;
+    background: var(--light);
 }
 
 .site-badge {
@@ -119,18 +128,21 @@ header {
     margin-bottom: 1rem;
 }
 
+/* 名前の透過イラスト画像（img4.png）のスタイル設定 */
 .header-logo {
-    width: 100%;
-    max-width: 480px;
-    height: auto;
-    aspect-ratio: 1530 / 547;
-    margin: 0 auto;
-    display: block;
+    width: 100%;           /* 横幅いっぱいに広げる */
+    max-width: 480px;      /* パソコン表示時の最大の横幅 */
+    height: auto;          /* 比率を維持して自動で高さを決定 */
+    aspect-ratio: 1530 / 547; /* 画像のアスペクト比を固定してガタつきを防止 */
+    margin: 0 auto;        /* 中央寄せ */
+    display: block;        /* 中央寄せに必須 */
+    opacity: 1;            /* 壊れて非表示になるのを確実に防ぐため初期値1に固定 */
 }
 
+/* スマホ表示時の画像幅の調整 */
 @media (max-width: 480px) {
     .header-logo {
-        max-width: 300px;
+        max-width: 300px;  /* スマホの画面幅に合わせて綺麗に収める */
     }
 }
 
@@ -154,8 +166,6 @@ header {
     max-width: 520px;
     margin: 0 auto;
     padding: 0 1.5rem 4rem;
-    position: relative;
-    z-index: 1;
 }
 
 .section-block {
@@ -252,16 +262,36 @@ header {
 }
 
 /* ==========================================
-   浮遊イラストコンテナの調整（重なり防止用余白を追加）
+   イラストが下の文章にかぶさらないようにする余白設定と浮遊アニメーション
    ========================================== */
+@keyframes floatingEffect {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px); /* 縦方向にだけ優しく浮遊させる */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 .image-box {
     text-align: center;
-    margin: 1.5rem 0 3.5rem; /* 下側に大きなマージンを確保して、スクロール時に下の文章と被るのを徹底防止 */
+    margin: 1.5rem 0 4.5rem; /* 上部へ位置調整 ＆ 下との距離(margin-bottom)を広げて重なりを完全にブロック */
     perspective: 1000px;
-    position: relative;
-    z-index: 2;
-    will-change: transform;
+    display: block;
+    animation: floatingEffect 6s ease-in-out infinite; /* 親側でゆったり浮遊させる */
 }
+
+/* 浮遊のタイミングをずらしてバラバラに動かす */
+.rotate-left {
+    animation-delay: 0s;
+}
+.rotate-right {
+    animation-delay: 1.5s;
+}
+
 .image-box img {
     width: 100%;
     max-width: 280px;
@@ -272,20 +302,22 @@ header {
     border-radius: 2px;
     box-sizing: border-box;
     box-shadow: 0 6px 16px rgba(109, 94, 125, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
+    /* カーソルが当たった・離れたときの滑らかな変化（高級仕様の0.6sイージング） */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* 個別イラストのベースの傾き角度 */
 .rotate-left img {
-    transform: rotate(-2.5deg) translateY(-2px);
+    transform: rotate(-2.5deg);
 }
 .rotate-right img {
-    transform: rotate(2deg) translateY(-2px);
+    transform: rotate(2deg);
 }
 
+/* ホバー時に滑らかにまっすぐになりつつ拡大 */
 .image-box img:hover {
-    transform: scale(1.04) rotate(0deg) translateY(-5px) !important;
-    box-shadow: 0 20px 38px rgba(109, 94, 125, 0.16), 0 4px 10px rgba(0, 0, 0, 0.03);
+    transform: scale(1.03) rotate(0deg);
+    box-shadow: 0 12px 24px rgba(109, 94, 125, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 h2 {
@@ -402,13 +434,13 @@ h2 i {
 }
 
 /* ==========================================
-   下部イラスト位置の微調整
+   下部イラストの重なり防止・浮遊設定
    ========================================== */
 .bottom-image-box {
     text-align: center;
-    margin: 3.5rem 0 2rem;
-    perspective: 1000px;
-    will-change: transform;
+    margin: 3.5rem 0 3.5rem; /* 下の文字に被らないよう十分なマージンを確保 */
+    animation: floatingEffect 6.5s ease-in-out infinite; /* 親要素ごと浮遊 */
+    animation-delay: 0.7s;
 }
 .bottom-image-box img {
     width: 170px;
@@ -418,11 +450,13 @@ h2 i {
     background: #fff;
     border-radius: 2px;
     box-shadow: 0 8px 20px rgba(109, 94, 125, 0.08);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
+    /* 吸い付くようなトランジション */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: rotate(-3deg);
 }
-.bottom-image-box:hover img {
-    transform: scale(1.05) rotate(-1deg) translateY(-5px) !important;
+.bottom-image-box img:hover {
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 12px 28px rgba(109, 94, 125, 0.14);
 }
 
 footer {
@@ -439,9 +473,8 @@ footer {
 
 <body>
 
-<div class="space-backdrop" id="js-space-backdrop"></div>
-
-<header class="gsap-reveal" id="js-header">
+<!-- ヘッダー -->
+<header class="fade-in-element delay-1">
     <span class="site-badge">Unofficial Fan-made Site</span>
     <h1 class="main-visual">
         <img src="img4.png" alt="メガ・ウルトラギガ" class="header-logo">
@@ -451,7 +484,8 @@ footer {
 
 <div class="container">
     
-    <div class="section-block gsap-reveal" id="js-news-block">
+    <!-- NEWS -->
+    <div class="section-block fade-in-element delay-2">
         <h2><i class="la la-bullhorn"></i> NEWS</h2>
         <div class="news-box">
             <div class="news-image">
@@ -470,7 +504,8 @@ footer {
         </div>
     </div>
     
-    <div class="section-block gsap-reveal">
+    <!-- PROFILE -->
+    <div class="section-block fade-in-element delay-3">
         <div class="mcd-badge"><i class="la la-cat"></i> 週5マック通いの猫</div>
         
         <div class="profile-box">
@@ -480,7 +515,7 @@ footer {
             得意技はうるとらねこぱんち。（自称）
         </div>
         
-        <div class="image-box rotate-left js-parallax-element" data-depth="0.05">
+        <div class="image-box rotate-left">
             <img src="img0.png" alt="321.inc所属ライバー メガ・ウルトラギガ立ち絵紹介写真">
         </div>
         
@@ -494,8 +529,9 @@ footer {
         </ul>
     </div>
 
-    <div class="section-block gsap-reveal">
-        <div class="image-box rotate-right js-parallax-element" data-depth="-0.03">
+    <!-- VIDEO & LINKS -->
+    <div class="section-block fade-in-element delay-4">
+        <div class="image-box rotate-right">
             <img src="img1.png" alt="メガ・ウルトラギガ活動イメージファンアート画像">
         </div>
         
@@ -527,9 +563,10 @@ footer {
     </div>
 </div>
 
-<div class="gsap-reveal">
-    <div class="bottom-image-box js-parallax-element" data-depth="0.04" style="margin-top: 1.5rem;">
-        <img src="img2.png" alt="メガ・ウルトラギガ ファンタジー風イラストファンアート" style="transform: rotate(-3deg);">
+<!-- 下部イラストとフッター（container の外側に正しく配置されている元コードの構造を維持） -->
+<div class="fade-in-element delay-5">
+    <div class="bottom-image-box">
+        <img src="img2.png" alt="メガ・ウルトラギガ ファンタジー風イラストファンアート">
     </div>
 
     <footer style="text-align: center; padding: 2rem 1rem; font-size: 0.85rem; line-height: 1.8; color: #666; border-top: 1px solid #eee; margin-top: 4rem;">
@@ -543,90 +580,6 @@ footer {
         <p style="margin-bottom: 0; font-size: 0.8rem; color: #999;">Images &amp; Characters &copy; 321.inc</p>
     </footer>
 </div>
-
-<script>
-    gsap.registerPlugin(ScrollTrigger);
-
-    // ロード時にヘッダーロゴが一瞬消えるのを防ぐための極上イージング
-    const VELOCITY_EASE = "power3.out";
-
-    window.addEventListener("DOMContentLoaded", () => {
-        // ヘッダーは透明度0からではなく、最初から表示した状態でわずかに滑らかに位置を調整
-        gsap.fromTo("#js-header", 
-            { y: 15 },
-            { y: 0, duration: 1.2, ease: VELOCITY_EASE }
-        );
-        
-        // NEWSブロックも自然にフェードイン
-        gsap.fromTo("#js-news-block", 
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 1.4, ease: VELOCITY_EASE, delay: 0.1 }
-        );
-    });
-
-    // 背景ドットパターンの上品なスクロール追従
-    gsap.to("#js-space-backdrop", {
-        yPercent: 6,
-        ease: "none",
-        scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.6
-        }
-    });
-
-    // 各コンテンツカード：重なりが起きないよう滑らかにフェードイン
-    const revealTargets = gsap.utils.toArray(".gsap-reveal");
-    revealTargets.forEach((block) => {
-        if (block.id === "js-header" || block.id === "js-news-block") return;
-
-        gsap.fromTo(block, 
-            { opacity: 0, y: 40 },
-            { 
-                opacity: 1, 
-                y: 0, 
-                duration: 1.2,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: block,
-                    start: "top 88%", 
-                    end: "top 30%",
-                    toggleActions: "play none none reverse"
-                }
-            }
-        );
-    });
-
-    // イラスト素材：絶対にかぶさらないようにパララックスの移動幅（data-depth）を安全な値に抑制
-    const parallaxElements = gsap.utils.toArray(".js-parallax-element");
-    parallaxElements.forEach((el) => {
-        const depth = parseFloat(el.getAttribute("data-depth")) || 0.05;
-        gsap.to(el, {
-            y: () => -window.innerHeight * depth,
-            ease: "none",
-            scrollTrigger: {
-                trigger: el,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1.2 // より滑らかにして境界をなめらかに
-            }
-        });
-    });
-
-    // イラスト素材：生きた呼吸を再現する「常時浮遊揺らぎ」アニメーション
-    const floatingImages = gsap.utils.toArray(".js-parallax-element img, .bottom-image-box img");
-    floatingImages.forEach((img, index) => {
-        gsap.to(img, {
-            y: 6, // 浮遊幅を少し小さく上品に
-            rotation: index % 2 === 0 ? 1 : -1, // 首振りもさらに控えめに
-            duration: 4 + (index * 0.5),
-            ease: "sine.inOut",
-            repeat: -1,
-            yoyo: true
-        });
-    });
-</script>
 
 </body>
 </html>
