@@ -198,12 +198,22 @@ header {
 }
 
 /* ==========================================
-   NEWS セクション
+   NEWS セクション（複数配置対応）
    ========================================== */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
 .news-box {
     display: flex;
     gap: 1.8rem;
     align-items: flex-start;
+}
+/* 2つ目以降のニュースの上にうっすら区切り線を入れる */
+.news-box + .news-box {
+    border-top: 1px solid rgba(167, 153, 183, 0.15);
+    padding-top: 2.5rem;
 }
 .news-image {
     width: 140px;
@@ -503,19 +513,35 @@ h2 {
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
             NEWS
         </h2>
-        <div class="news-box">
-            <div class="news-image">
-                <img src="img3.webp" alt="メガ・ウルトラギガ（メガちゃん）事務所イベント告知画像" width="120" height="120" fetchpriority="high" decoding="async">
+        <div class="news-list">
+            <div class="news-box">
+                <div class="news-image">
+                    <img src="img3.webp" alt="メガ・ウルトラギガ（メガちゃん）事務所イベント告知画像" width="120" height="120" fetchpriority="high" decoding="async">
+                </div>
+                <div class="news-content">
+                    <span class="news-date">2026.07.14</span>
+                    <h3 class="news-title">なんと20日から事務所ユニットイベントが開催！</h3>
+                    <p class="news-text">
+                        気になるメンバーは、<br>
+                        ？？🦀？？⚔️？？🍭？？🍔<br>
+                        たちとのこと！<br>
+                        詳細は20日以降のお楽しみに…
+                    </p>
+                </div>
             </div>
-            <div class="news-content">
-                <span class="news-date">2026.07.14</span>
-                <h3 class="news-title">なんと20日から事務所ユニットイベントが開催！</h3>
-                <p class="news-text">
-                    気になるメンバーは、<br>
-                    ？？🦀？？⚔️？？🍭？？🍔<br>
-                    たちとのこと！<br>
-                    詳細は20日以降のお楽しみに…
-                </p>
+            
+            <div class="news-box">
+                <div class="news-image">
+                    <img src="img3.webp" alt="メガ・ウルトラギガ お知らせ画像" width="120" height="120" loading="lazy" decoding="async">
+                </div>
+                <div class="news-content">
+                    <span class="news-date">2026.07.16</span>
+                    <h3 class="news-title">非公式ファンサイトがアップデートされました！</h3>
+                    <p class="news-text">
+                        いつも応援ありがとうございますニャン！👊💜<br>
+                        ファンのみんなにより使いやすく、最新情報が見やすくなるようにニュース欄が2つに増えました！今後の更新をお楽しみに！
+                    </p>
+                </div>
             </div>
         </div>
     </section>
