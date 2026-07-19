@@ -35,6 +35,17 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
+
+/* 追加するCSS */
+.header-video {
+    display: block;
+    width: 100%;
+    max-width: 520px;    /* ロゴの最大横幅（520px）と揃えるときれいに見えます */
+    height: auto;        /* 高さを自動にして動画の比率を保つ */
+    margin: 20px auto 0; /* ロゴ画像との間に少し隙間を作る */
+    border-radius: 8px;
+}
+
 :root {
     --primary: #A799B7;
     --dark: #5A4E69;
@@ -324,10 +335,18 @@ h2 { font-size: 0.85rem; color: var(--dark); border-bottom: 1px solid rgba(167, 
 
 <header class="fade-in-element delay-1">
     <span class="site-badge">Unofficial Fan-made Site</span>
+    
+    <!-- ロゴ画像 -->
     <h1 class="main-visual">
-        <img src="img4.webp" alt="メガ・ウルトラギガ" class="header-logo" width="480" height="172" fetchpriority="high">
+        <img src="img4.webp" alt="メガ・ウルトラギガ" class="header-logo" width="1527" height="599" fetchpriority="high">
     </h1>
-    <span class="sub-name">Mega urtr giga</span>
+
+    <!-- 動画の配置（ポスター画像を確実に存在するimg4.webpに変更） -->
+<!-- controls を追加しました -->
+    <video autoplay loop muted playsinline controls class="header-video">
+        <source src="./mega.mp4" type="video/mp4">
+        お使いのブラウザは動画の再生に対応していません。
+</video>
 </header>
 
 <main class="container">
@@ -413,9 +432,7 @@ h2 { font-size: 0.85rem; color: var(--dark); border-bottom: 1px solid rgba(167, 
             夢は「大金持ちになること！」らしい。
         </div>
         
-        <div class="image-box floating rotate-left">
-            <img src="img0.webp" alt="メガ・ウルトラギガ３面図" width="480" height="270" decoding="async">
-        </div>
+
         
         <h2>
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
@@ -431,9 +448,7 @@ h2 { font-size: 0.85rem; color: var(--dark); border-bottom: 1px solid rgba(167, 
     </section>
 
     <section class="section-block fade-in-element delay-4">
-        <div class="image-box floating rotate-right">
-            <img src="img1.webp" alt="メガ・ウルトラギガの画像" width="480" height="270" loading="lazy" decoding="async">
-        </div>
+
         
         <h2 class="mt-0">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
