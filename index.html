@@ -43,6 +43,7 @@
     max-width: 520px;    /* ロゴの最大横幅（520px）と揃えるときれいに見えます */
     height: auto;        /* 高さを自動にして動画の比率を保つ */
     margin: 20px auto 0; /* ロゴ画像との間に少し隙間を作る */
+    border-radius: 8px;
 }
 
 :root {
@@ -333,20 +334,17 @@ h2 { font-size: 0.85rem; color: var(--dark); border-bottom: 1px solid rgba(167, 
 <body>
 
 <header class="fade-in-element delay-1">
-
-     </video>
-        <video autoplay loop muted playsinline class="header-video">
-        <source src="mega.mp4" type="video/mp4">
-        お使いのブラウザは動画の再生に対応していません。
-    </video>
-    
     <span class="site-badge">Unofficial Fan-made Site</span>
     
     <!-- ロゴ画像 -->
     <h1 class="main-visual">
         <img src="img4.webp" alt="メガ・ウルトラギガ" class="header-logo" width="1527" height="599" fetchpriority="high">
     </h1>
-
+    </video>
+        <video autoplay loop muted playsinline class="header-video">
+        <source src="mega.mp4" type="video/mp4">
+        お使いのブラウザは動画の再生に対応していません。
+    </video>
 </header>
 
 <main class="container">
